@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 40 30% 96%;
+    --card: 0 0% 6%;
+    --card-foreground: 40 30% 96%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 40 30% 96%;
+    --primary: 44 62% 55%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 150 25% 14%;
+    --secondary-foreground: 40 30% 96%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 150 30% 22%;
+    --accent-foreground: 44 62% 80%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 20% 16%;
+    --input: 40 20% 16%;
+    --ring: 44 62% 55%;
+    --radius: 0.75rem;
+
+    /* Museum-specific tokens */
+    --museum-bg: #0a0a0a;
+    --museum-green: #1f3d2f;
+    --museum-green-bright: #2f6b4f;
+    --museum-gold: #c9a227;
+    --museum-gold-soft: #e6c55c;
+    --museum-ivory: #f4ecd8;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 40 30% 96%;
+    --card: 0 0% 6%;
+    --card-foreground: 40 30% 96%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 40 30% 96%;
+    --primary: 44 62% 55%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 150 25% 14%;
+    --secondary-foreground: 40 30% 96%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 150 30% 22%;
+    --accent-foreground: 44 62% 80%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 20% 16%;
+    --input: 40 20% 16%;
+    --ring: 44 62% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: var(--museum-bg);
+    font-feature-settings: "ss01", "cv01", "cv02";
+  }
+}
+
+@layer utilities {
+  /* Elegant serif feel for museum labels */
+  .font-museum-serif {
+    font-family: var(--font-museum-serif), "Cormorant Garamond", Georgia, serif;
+  }
+  .font-museum-mono {
+    font-family: var(--font-museum-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Spotlight that follows the cursor, driven by CSS vars --mx / --my (0..1) */
+  .museum-spotlight {
+    background: radial-gradient(
+      600px circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%),
+      rgba(201, 162, 39, 0.18),
+      rgba(47, 107, 79, 0.10) 25%,
+      transparent 55%
+    );
+  }
+
+  /* Subtle scanline overlay for the "under glass" exhibit feel */
+  .museum-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Dust particle drift */
+  .museum-dust::before,
+  .museum-dust::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(244, 236, 216, 0.35), transparent),
+      radial-gradient(1px 1px at 70% 60%, rgba(244, 236, 216, 0.25), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(244, 236, 216, 0.30), transparent),
+      radial-gradient(1px 1px at 85% 25%, rgba(244, 236, 216, 0.20), transparent),
+      radial-gradient(1px 1px at 55% 45%, rgba(244, 236, 216, 0.28), transparent);
+    background-size: 200% 200%;
+    animation: dust-drift 18s linear infinite;
+  }
+  .museum-dust::after {
+    animation-duration: 26s;
+    animation-direction: reverse;
+    opacity: 0.6;
+  }
+
+  @keyframes dust-drift {
+    0% { background-position: 0% 0%, 100% 0%, 50% 100%, 0% 50%, 100% 100%; }
+    100% { background-position: 100% 100%, 0% 100%, 50% 0%, 100% 50%, 0% 0%; }
+  }
+
+  /* Gold gradient text */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #e6c55c 0%, #c9a227 50%, #9a7b1a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .border-gold-glow {
+    box-shadow:
+      0 0 0 1px rgba(201, 162, 39, 0.4),
+      0 0 24px -4px rgba(201, 162, 39, 0.35),
+      0 0 60px -10px rgba(47, 107, 79, 0.4);
+  }
+
+  /* Glassmorphism for action buttons */
+  .glass-gold {
+    background: rgba(20, 28, 22, 0.45);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(201, 162, 39, 0.5);
+  }
+
+  /* Hidden scrollbar for horizontal category tabs on mobile */
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}

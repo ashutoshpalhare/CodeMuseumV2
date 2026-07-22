@@ -1,0 +1,118 @@
+/* ==========================================================================
+   responsive.css — Mobile-first responsive adjustments
+   ========================================================================== */
+
+/* ---- Large mobile / small tablet ---- */
+@media (max-width: 639px) {
+  .museum-container {
+    padding: 3rem 1.5rem;
+  }
+
+  .hero {
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .showcase-title {
+    font-size: 1.875rem;
+  }
+
+  /* Category filter: horizontal scroll */
+  .category-filter {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding: 0 1.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Full-width cards */
+  .exhibit-card {
+    max-width: 100%;
+  }
+
+  /* Stacked action buttons */
+  .exhibit-actions-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero links stack */
+  .hero-links {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---- Small mobile ---- */
+@media (max-width: 380px) {
+  .museum-container {
+    padding: 2.5rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.75rem;
+  }
+
+  .hero-meta {
+    gap: 0.75rem;
+  }
+
+  .filter-tab {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* ---- Tablet ---- */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .museum-container {
+    padding: 4rem 2rem;
+  }
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 1024px) {
+  .museum-container {
+    padding: 5rem 2rem;
+  }
+}
+
+/* ---- Large desktop ---- */
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .ambient-backdrop,
+  .exhibit-dust,
+  .exhibit-scanlines,
+  .exhibit-spotlight {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

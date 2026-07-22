@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A curated collection of software artifacts, experiments, and digital creations built with modern technologies." />
+  <title>Code Museum</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <main class="museum-main">
+    <!-- Ambient backdrop -->
+    <div class="ambient-backdrop" aria-hidden="true">
+      <div class="ambient-glow ambient-glow--top"></div>
+      <div class="ambient-glow ambient-glow--bottom"></div>
+    </div>
+
+    <div class="museum-container">
+      <!-- Curator hero -->
+      <header class="hero" id="hero">
+        <div class="hero-avatar-wrap">
+          <div class="hero-avatar-glow"></div>
+          <img id="curator-avatar" class="hero-avatar" alt="" />
+        </div>
+        <p class="hero-eyebrow" id="curator-eyebrow"></p>
+        <h1 class="hero-title">
+          The <span class="text-gold-gradient">Code Museum</span>
+        </h1>
+        <p class="hero-tagline" id="curator-tagline"></p>
+        <p class="hero-bio" id="curator-bio"></p>
+
+        <div class="hero-meta" id="curator-meta"></div>
+
+        <div class="hero-links" id="curator-links"></div>
+
+        <div class="hero-divider"></div>
+      </header>
+
+      <!-- Project Showcase -->
+      <section class="showcase" aria-label="Project Showcase">
+        <div class="showcase-header">
+          <p class="showcase-eyebrow">The Collection</p>
+          <h2 class="showcase-title">Project Showcase</h2>
+        </div>
+
+        <nav class="category-filter scrollbar-hidden" id="category-filter" aria-label="Exhibit categories"></nav>
+
+        <div class="gallery-grid" id="gallery-grid"></div>
+
+        <p class="empty-state" id="empty-state" hidden>
+          No artifacts in this wing
+        </p>
+      </section>
+
+      <footer class="museum-footer">
+        <p id="footer-plaque"></p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/tilt.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

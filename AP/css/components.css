@@ -1,0 +1,438 @@
+/* ==========================================================================
+   components.css — Category filter, project cards, buttons, badges
+   ========================================================================== */
+
+/* ---- Category filter ---- */
+.category-filter {
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  width: max-content;
+}
+
+@media (min-width: 640px) {
+  .category-filter {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+    padding: 0;
+  }
+}
+
+.filter-tab {
+  position: relative;
+  flex-shrink: 0;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.filter-tab:hover {
+  border-color: rgba(201, 162, 39, 0.4);
+  color: var(--museum-ivory);
+}
+
+.filter-tab.is-active {
+  border-color: rgba(201, 162, 39, 0.6);
+  color: var(--museum-gold-soft);
+}
+
+.filter-tab.is-active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  background: rgba(201, 162, 39, 0.1);
+  box-shadow:
+    0 0 20px -6px rgba(201, 162, 39, 0.5),
+    inset 0 0 12px -4px rgba(201, 162, 39, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+.filter-tab-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-tab-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(244, 236, 216, 0.3);
+}
+
+.filter-tab.is-active .filter-tab-count {
+  color: rgba(201, 162, 39, 0.7);
+}
+
+/* ---- Gallery grid ---- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---- Project exhibit card ---- */
+.exhibit-card {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  perspective: 1200px;
+  user-select: none;
+}
+
+.exhibit-card-body {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.5s ease;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+}
+
+.exhibit-card.is-active .exhibit-card-body {
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.45),
+    0 24px 60px -12px rgba(201, 162, 39, 0.3),
+    0 0 80px -20px rgba(47, 107, 79, 0.45);
+}
+
+/* Thumbnail */
+.exhibit-thumbnail {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.exhibit-thumbnail-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.exhibit-card.is-active .exhibit-thumbnail-img {
+  transform: scale(1.08);
+}
+
+/* Dark overlay */
+.exhibit-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1));
+  opacity: 0.25;
+  transition: opacity 0.4s ease;
+}
+
+.exhibit-card.is-active .exhibit-overlay {
+  opacity: 1;
+}
+
+/* Scanlines */
+.exhibit-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Dust particles */
+.exhibit-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.exhibit-dust::before,
+.exhibit-dust::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(244, 236, 216, 0.35), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(244, 236, 216, 0.25), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(244, 236, 216, 0.3), transparent),
+    radial-gradient(1px 1px at 85% 25%, rgba(244, 236, 216, 0.2), transparent),
+    radial-gradient(1px 1px at 55% 45%, rgba(244, 236, 216, 0.28), transparent);
+  background-size: 200% 200%;
+  animation: dust-drift 18s linear infinite;
+}
+
+.exhibit-dust::after {
+  animation-duration: 26s;
+  animation-direction: reverse;
+  opacity: 0.6;
+}
+
+/* Artifact ID badge */
+.artifact-id {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 20;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--museum-gold-soft);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Hover action buttons */
+.exhibit-actions {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.exhibit-card.is-active .exhibit-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exhibit-actions-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .exhibit-actions-inner {
+    flex-direction: row;
+  }
+}
+
+/* Action button */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--museum-ivory);
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  border-color: var(--museum-gold);
+  background: rgba(201, 162, 39, 0.15);
+  color: var(--museum-gold-soft);
+  box-shadow: 0 0 20px -4px rgba(201, 162, 39, 0.6);
+}
+
+.action-btn svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.action-btn .external-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.action-btn:hover .external-icon {
+  transform: translateX(2px);
+}
+
+/* Bottom info section */
+.exhibit-info {
+  position: relative;
+  z-index: 10;
+  padding: 1.25rem;
+}
+
+.exhibit-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  pointer-events: none;
+  background: radial-gradient(
+    500px circle at 50% 50%,
+    rgba(201, 162, 39, 0.2),
+    rgba(47, 107, 79, 0.12) 28%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.exhibit-card.is-active .exhibit-spotlight {
+  opacity: 1;
+}
+
+.exhibit-info-content {
+  position: relative;
+}
+
+.exhibit-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.exhibit-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--museum-ivory);
+}
+
+.exhibit-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(201, 162, 39, 0.7);
+  flex-shrink: 0;
+}
+
+.exhibit-description {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.exhibit-card.is-active .exhibit-description {
+  opacity: 0.35;
+  transform: translateY(6px);
+}
+
+/* Tech stack badges */
+.exhibit-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.exhibit-card.is-active .exhibit-tech {
+  opacity: 0.4;
+  transform: translateY(4px);
+}
+
+.tech-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  padding: 0.25rem 0.625rem;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.tech-badge svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Top shimmer line */
+.exhibit-shimmer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.exhibit-card.is-active .exhibit-shimmer {
+  opacity: 1;
+}
+
+/* Empty state */
+.empty-state {
+  padding: 4rem 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(244, 236, 216, 0.35);
+}
+
+/* Hero link buttons */
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--museum-ivory);
+  transition: all 0.3s ease;
+}
+
+.hero-link:hover {
+  border-color: var(--museum-gold);
+  color: var(--museum-gold-soft);
+  box-shadow: 0 0 20px -4px rgba(201, 162, 39, 0.6);
+}
+
+.hero-link svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
